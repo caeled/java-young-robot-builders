@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Example code · Robot Builders</title><link rel="stylesheet" href="assets/styles.css"><script src="assets/search.js" defer></script></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">↗</span> ROBOT BUILDERS</a><nav aria-label="Main navigation"><a href="course.html">The course</a><a href="geometry-bench.html">Geometry Bench</a><a href="java-reference.html">Java reference</a><a href="examples.html" aria-current="page">Example code</a><a href="discover.html">Discover</a></nav></header><main id="main" class="wrap section"><p class="eyebrow">CODE YOU CAN TAKE APART</p><h1>Examples with<br>room to experiment.</h1><p class="lede">Eight complete Java programs. Read a prediction, run a small experiment on a computer, and change one thing. Each file includes its own class and main method.</p><p class="notice">Desktop examples, no hardware SDK or dependencies. They use Java 17-compatible syntax; the browser displays code but does not execute Java. TeachingRobotMission is an ideal simulation, not a motor controller.</p><details><summary>How to run a downloaded example</summary><p>Use a mentor’s computer with a Java Development Kit (JDK) 17 or later. Save the file with its original class name, open a terminal in that folder, and compile and run:</p><pre><code>javac TrafficLight.java
+java TrafficLight</code></pre><p>Replace TrafficLight with the downloaded class name. A Java runtime alone does not supply javac. No robot, account, or build tool is needed.</p><p><a href="https://dev.java/learn/getting-started/">Official Java getting-started guide ↗</a></p></details><section data-search-collection><div class="search-controls" hidden><div><label for="library-search">Search explanations and code</label><input id="library-search" type="search" placeholder="Try: sensor, state, boundary, delivery…" autocomplete="off"></div><div><label for="library-category">Topic</label><select id="library-category"><option value="">All topics</option><option>Decisions</option><option>Sensors</option><option>Geometry</option><option>Motors</option><option>Automation</option><option>Debugging</option><option>Feedback</option><option>Mission</option></select></div><button type="button" class="secondary" data-clear-search>Clear filters</button></div><p role="status">All entries are shown.</p><noscript><p>Search needs JavaScript. All entries remain readable below; use your browser’s Find command.</p></noscript><div class="example-grid"><article class="example-card" id="TrafficLight" data-search-card data-category="Decisions" data-keywords="Decisions module 2"><p class="eyebrow">Decisions / MODULE 2</p><h2>TrafficLight</h2><p>Trace a decision and a counted loop. Green prints three moves; changing light to red prints WAIT instead.</p><div class="actions"><a class="button" href="examples/TrafficLight.java" download>Download .java ↓</a><button type="button" class="secondary" data-copy-code="code-TrafficLight">Copy code</button><span class="small" role="status"></span></div><pre><code id="code-TrafficLight">public class TrafficLight {
+    public static void main(String[] args) {
+        String light = &quot;green&quot;;
+        for (int lap = 0; lap &lt; 3; lap++) {
+            if (&quot;green&quot;.equals(light)) {
+                System.out.println(&quot;MOVE &quot; + lap);
+            } else {
+                System.out.println(&quot;WAIT &quot; + lap);
+            }
+        }
+    }
+}</code></pre><details><summary>Expected output for the original code</summary><pre><code>MOVE 0
+MOVE 1
+MOVE 2</code></pre></details><p><strong>Change one thing:</strong> Change the light to red. Predict every output before running.</p><p class="small"><a href="module-2.html">Back to Module 2</a> · <a href="#TrafficLight">Link to this example</a></p></article><article class="example-card" id="SensorNotebook" data-search-card data-category="Sensors" data-keywords="Sensors module 3"><p class="eyebrow">Sensors / MODULE 3</p><h2>SensorNotebook</h2><p>Correct five biased readings, calculate a mean, and keep the measurements in a small array.</p><div class="actions"><a class="button" href="examples/SensorNotebook.java" download>Download .java ↓</a><button type="button" class="secondary" data-copy-code="code-SensorNotebook">Copy code</button><span class="small" role="status"></span></div><pre><code id="code-SensorNotebook">public class SensorNotebook {
+    public static void main(String[] args) {
+        double[] rawCm = {41, 47, 45, 49, 43};
+        double biasCm = 5;
+        double sum = 0;
+        for (double raw : rawCm) {
+            if (!Double.isFinite(raw)) {
+                throw new IllegalArgumentException(&quot;Invalid sensor reading&quot;);
+            }
+            sum += raw - biasCm;
+        }
+        if (rawCm.length == 0) {
+            throw new IllegalArgumentException(&quot;Need at least one reading&quot;);
+        }
+        System.out.println(&quot;Mean corrected cm: &quot; + sum / rawCm.length);
+    }
+}</code></pre><details><summary>Expected output for the original code</summary><pre><code>Mean corrected cm: 40.0</code></pre></details><p><strong>Change one thing:</strong> Change the bias to 0. Explain why averaging did not remove the offset.</p><p class="small"><a href="module-3.html">Back to Module 3</a> · <a href="#SensorNotebook">Link to this example</a></p></article><article class="example-card" id="GeometryRoute" data-search-card data-category="Geometry" data-keywords="Geometry module 4"><p class="eyebrow">Geometry / MODULE 4</p><h2>GeometryRoute</h2><p>Calculate the direct distance and heading from the mission start to its target.</p><div class="actions"><a class="button" href="examples/GeometryRoute.java" download>Download .java ↓</a><button type="button" class="secondary" data-copy-code="code-GeometryRoute">Copy code</button><span class="small" role="status"></span></div><pre><code id="code-GeometryRoute">import java.util.Locale;
+
+public class GeometryRoute {
+    public static void main(String[] args) {
+        double dx = 140 - 40;
+        double dy = 120 - 40;
+        double distanceCm = Math.hypot(dx, dy);
+        double headingDeg = Math.toDegrees(Math.atan2(dy, dx));
+        System.out.printf(Locale.ROOT, &quot;Distance: %.2f cm%n&quot;, distanceCm);
+        System.out.printf(Locale.ROOT, &quot;Heading: %.2f degrees%n&quot;, headingDeg);
+    }
+}</code></pre><details><summary>Expected output for the original code</summary><pre><code>Distance: 128.06 cm
+Heading: 38.66 degrees</code></pre></details><p><strong>Change one thing:</strong> Change the target to due west. What signed heading does atan2 return?</p><p class="small"><a href="module-4.html">Back to Module 4</a> · <a href="#GeometryRoute">Link to this example</a></p></article><article class="example-card" id="WheelTravel" data-search-card data-category="Motors" data-keywords="Motors module 5"><p class="eyebrow">Motors / MODULE 5</p><h2>WheelTravel</h2><p>Translate motor-side encoder counts into wheel turns and centimeters for a geared wheel.</p><div class="actions"><a class="button" href="examples/WheelTravel.java" download>Download .java ↓</a><button type="button" class="secondary" data-copy-code="code-WheelTravel">Copy code</button><span class="small" role="status"></span></div><pre><code id="code-WheelTravel">import java.util.Locale;
+
+public class WheelTravel {
+    public static void main(String[] args) {
+        double ticks = 2160;
+        double ticksPerMotorTurn = 360;
+        double reduction = 3;
+        double wheelDiameterCm = 10;
+        double wheelTurns = ticks / ticksPerMotorTurn / reduction;
+        double distanceCm = wheelTurns * Math.PI * wheelDiameterCm;
+        System.out.printf(Locale.ROOT, &quot;Wheel turns: %.1f%n&quot;, wheelTurns);
+        System.out.printf(Locale.ROOT, &quot;Distance: %.2f cm%n&quot;, distanceCm);
+    }
+}</code></pre><details><summary>Expected output for the original code</summary><pre><code>Wheel turns: 2.0
+Distance: 62.83 cm</code></pre></details><p><strong>Change one thing:</strong> Double the wheel diameter while keeping the counts. Predict the travel.</p><p class="small"><a href="module-5.html">Back to Module 5</a> · <a href="#WheelTravel">Link to this example</a></p></article><article class="example-card" id="AutomationTrace" data-search-card data-category="Automation" data-keywords="Automation module 6"><p class="eyebrow">Automation / MODULE 6</p><h2>AutomationTrace</h2><p>Process one scheduled reading per update. This desktop trace mirrors the three-step drive model; it does not run a real timer or motor.</p><div class="actions"><a class="button" href="examples/AutomationTrace.java" download>Download .java ↓</a><button type="button" class="secondary" data-copy-code="code-AutomationTrace">Copy code</button><span class="small" role="status"></span></div><pre><code id="code-AutomationTrace">public class AutomationTrace {
+    enum State { WAIT, DRIVE, DONE }
+
+    public static void main(String[] args) {
+        boolean[] pathClear = {false, true, true, true, true, true};
+        State state = State.WAIT;
+        int driveSteps = 0;
+        for (boolean clear : pathClear) {
+            switch (state) {
+                case WAIT:
+                    if (clear) state = State.DRIVE;
+                    break;
+                case DRIVE:
+                    driveSteps++;
+                    if (!clear || driveSteps &gt;= 3) state = State.DONE;
+                    break;
+                case DONE:
+                    break;
+            }
+            boolean motorOn = state == State.DRIVE;
+            System.out.println(state + &quot;: motor=&quot; + motorOn);
+        }
+    }
+}</code></pre><details><summary>Expected output for the original code</summary><pre><code>WAIT: motor=false
+DRIVE: motor=true
+DRIVE: motor=true
+DRIVE: motor=true
+DONE: motor=false
+DONE: motor=false</code></pre></details><p><strong>Change one thing:</strong> Change the third reading to false. Explain why DONE does not restart.</p><p class="small"><a href="module-6.html">Back to Module 6</a> · <a href="#AutomationTrace">Link to this example</a></p></article><article class="example-card" id="BoundaryTests" data-search-card data-category="Debugging" data-keywords="Debugging module 7"><p class="eyebrow">Debugging / MODULE 7</p><h2>BoundaryTests</h2><p>Test below, at, and above the stopping boundary. A thrown AssertionError makes a failure visible without any test library.</p><div class="actions"><a class="button" href="examples/BoundaryTests.java" download>Download .java ↓</a><button type="button" class="secondary" data-copy-code="code-BoundaryTests">Copy code</button><span class="small" role="status"></span></div><pre><code id="code-BoundaryTests">public class BoundaryTests {
+    static boolean isClear(double cm) {
+        return Double.isFinite(cm) &amp;&amp; cm &gt; 20;
+    }
+
+    public static void main(String[] args) {
+        double[] readings = {19, 20, 21, Double.NaN};
+        boolean[] expected = {false, false, true, false};
+        for (int i = 0; i &lt; readings.length; i++) {
+            if (isClear(readings[i]) != expected[i]) {
+                throw new AssertionError(&quot;Failed at &quot; + readings[i]);
+            }
+        }
+        System.out.println(&quot;4 boundary/invalid-reading tests passed&quot;);
+    }
+}</code></pre><details><summary>Expected output for the original code</summary><pre><code>4 boundary/invalid-reading tests passed</code></pre></details><p><strong>Change one thing:</strong> Change > to >=. Which test fails first?</p><p class="small"><a href="module-7.html">Back to Module 7</a> · <a href="#BoundaryTests">Link to this example</a></p></article><article class="example-card" id="BoundedCorrection" data-search-card data-category="Feedback" data-keywords="Feedback module 8"><p class="eyebrow">Feedback / MODULE 8</p><h2>BoundedCorrection</h2><p>Use an error, a proportional gain, a correction limit, and a step budget. Report whether the goal was actually reached.</p><div class="actions"><a class="button" href="examples/BoundedCorrection.java" download>Download .java ↓</a><button type="button" class="secondary" data-copy-code="code-BoundedCorrection">Copy code</button><span class="small" role="status"></span></div><pre><code id="code-BoundedCorrection">import java.util.Locale;
+
+public class BoundedCorrection {
+    public static void main(String[] args) {
+        double positionCm = 5;
+        double goalCm = 100;
+        double gain = 0.5;
+        int steps = 0;
+        while (Math.abs(goalCm - positionCm) &gt; 2 &amp;&amp; steps &lt; 30) {
+            double requested = gain * (goalCm - positionCm);
+            double correction = Math.max(-20, Math.min(20, requested));
+            positionCm += correction;
+            steps++;
+        }
+        boolean reached = Math.abs(goalCm - positionCm) &lt;= 2;
+        System.out.println(&quot;Reached: &quot; + reached);
+        System.out.println(&quot;Steps: &quot; + steps);
+        System.out.printf(Locale.ROOT, &quot;Position: %.3f cm%n&quot;, positionCm);
+    }
+}</code></pre><details><summary>Expected output for the original code</summary><pre><code>Reached: true
+Steps: 8
+Position: 98.906 cm</code></pre></details><p><strong>Change one thing:</strong> Try gains 0 and 2. Why can the loop end without success?</p><p class="small"><a href="module-8.html">Back to Module 8</a> · <a href="#BoundedCorrection">Link to this example</a></p></article><article class="example-card" id="TeachingRobotMission" data-search-card data-category="Mission" data-keywords="Mission module 9"><p class="eyebrow">Mission / MODULE 9</p><h2>TeachingRobotMission</h2><p>A complete implementation of the course’s imaginary robot. It calculates ideal point motion on a desktop, rejects moves outside the field, and verifies the delivery.</p><div class="actions"><a class="button" href="examples/TeachingRobotMission.java" download>Download .java ↓</a><button type="button" class="secondary" data-copy-code="code-TeachingRobotMission">Copy code</button><span class="small" role="status"></span></div><pre><code id="code-TeachingRobotMission">import java.util.Locale;
+
+public class TeachingRobotMission {
+    static class TeachingRobot {
+        private double xCm = 40;
+        private double yCm = 40;
+        private double headingDeg = 0;
+        private boolean stopped = true;
+
+        void forward(double distanceCm) {
+            if (!Double.isFinite(distanceCm) || Math.abs(distanceCm) &gt; 200) {
+                throw new IllegalArgumentException(&quot;Distance outside teaching limit&quot;);
+            }
+            double radians = Math.toRadians(headingDeg);
+            double nextX = xCm + distanceCm * Math.cos(radians);
+            double nextY = yCm + distanceCm * Math.sin(radians);
+            if (nextX &lt; -1e-9 || nextX &gt; 200 + 1e-9
+                    || nextY &lt; -1e-9 || nextY &gt; 200 + 1e-9) {
+                throw new IllegalArgumentException(&quot;Move leaves the field&quot;);
+            }
+            xCm = nextX;
+            yCm = nextY;
+            stopped = false;
+        }
+
+        void turnLeft(double degrees) {
+            if (!Double.isFinite(degrees) || Math.abs(degrees) &gt; 360) {
+                throw new IllegalArgumentException(&quot;Turn outside teaching limit&quot;);
+            }
+            headingDeg = ((headingDeg + degrees) % 360 + 360) % 360;
+        }
+
+        void stop() { stopped = true; }
+    }
+
+    public static void main(String[] args) {
+        TeachingRobot robot = new TeachingRobot();
+        robot.forward(100);
+        robot.turnLeft(90);
+        robot.forward(80);
+        robot.stop();
+        double errorCm = Math.hypot(140 - robot.xCm, 120 - robot.yCm);
+        boolean delivered = robot.stopped &amp;&amp; errorCm &lt;= 5;
+        System.out.printf(Locale.ROOT, &quot;Final pose: (%.1f, %.1f) cm%n&quot;, robot.xCm, robot.yCm);
+        System.out.println(&quot;Delivered and stopped: &quot; + delivered);
+        if (!delivered) throw new AssertionError(&quot;Delivery missed&quot;);
+    }
+}</code></pre><details><summary>Expected output for the original code</summary><pre><code>Final pose: (140.0, 120.0) cm
+Delivered and stopped: true</code></pre></details><p><strong>Change one thing:</strong> Create another route to the same target. Change only the command sequence.</p><p class="small"><a href="module-9.html">Back to Module 9</a> · <a href="#TeachingRobotMission">Link to this example</a></p></article></div></section></main><footer class="wrap footer"><a href="course.html">Course map</a><span>Sense → Think → Act → Check → Correct</span><a href="java-reference.html">Java reference</a></footer></body></html>
