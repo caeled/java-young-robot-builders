@@ -7,6 +7,7 @@ Build, test, observe, fix, repeat. Every activity follows **Sense → Think → 
 ## Start exploring
 
 - [Workshop home](index.html): landing page and first steps.
+- [Discover](discover.html): youth, teen, and adult competition videos, credited industrial robot photos, and a brief Java/Python reference.
 - [Course map](course.html): learning outcomes and the nine-module roadmap.
 - [Module 1](module-1.html): a 30–45 minute lesson on commands, sequence, variables, methods, and decisions, including an interactive command-order experiment.
 - [Geometry Bench](geometry-bench.html): turn and drive a simulated robot, explore coordinates, compare predictions with measurements, and reach three targets.
@@ -15,7 +16,7 @@ Module 1 and the Geometry Bench prototype are available now. Modules 2–9 are p
 
 ## Run locally
 
-Open `index.html` directly in a modern browser. No build, package installation, framework, external fonts, or network requests are required for the course itself.
+Open `index.html` directly in a modern browser. No build, package installation, framework, external fonts, or network requests are required for the core lessons and benches. Discover loads YouTube players and Wikimedia photos over the internet; source/watch links remain visible when embeds are unavailable.
 
 For a local server, if Python is installed, run this from the repository directory:
 
@@ -56,6 +57,7 @@ Reading support or a mentor can help beginners. No prior Java experience is assu
 ```text
 index.html               Landing page
 course.html              Course map
+discover.html            Competition videos, factory photos, Python reference
 module-1.html            First lesson and sequence activity
 geometry-bench.html      Coordinate practice lab
 assets/styles.css        Responsive shared styles
