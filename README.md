@@ -15,6 +15,13 @@ Build, test, observe, fix, repeat. Every activity follows **Sense → Think → 
 
 All nine introductory modules are available. These are teaching prototypes, not a classroom curriculum validated by student trials. See the [course outline](COURSE_OUTLINE.md) for outcomes and a first-pilot checklist.
 
+## Download or open the project
+
+- [Download the complete course ZIP](https://github.com/caeled/java-young-robot-builders/archive/refs/heads/main.zip).
+- [Open the project on GitHub](https://github.com/caeled/java-young-robot-builders).
+
+Extract the ZIP and open `index.html` inside the extracted folder. The ZIP link always packages the latest `main` branch, including lessons, labs, Java examples, and licenses. Videos and external resources require internet access.
+
 ## Run and host
 
 Open `index.html` in a modern browser. No build step, framework, packages, external fonts, or server is required. Core lessons, search, and benches work offline. Discover’s media and external documentation links need internet access.
