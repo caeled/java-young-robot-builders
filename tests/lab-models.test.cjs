@@ -64,3 +64,15 @@ test('out-of-field route reports partial trace and does not accept the offending
   assert.equal(result.trace.length, 2);
   close(result.pose.x, 140);
 });
+
+test('replay interpolates drives and preserves the commanded turn direction', () => {
+  const start = { x: 40, y: 40, heading: 0 };
+  const drive = { x: 140, y: 40, heading: 0, kind: 'drive', value: 100 };
+  assert.deepEqual(m.playbackPose(start, drive, 0.5), { x: 90, y: 40, heading: 0 });
+  const clockwise = { ...start, heading: 90, kind: 'turn', value: -270 };
+  close(m.playbackPose(start, clockwise, 0.5).heading, 225);
+  const fullTurn = { ...start, kind: 'turn', value: 360 };
+  close(m.playbackPose(start, fullTurn, 0.5).heading, 180);
+  close(m.playbackPose(start, fullTurn, 1).heading, 0);
+  assert.equal(m.runPlan('DRIVE 200\nSTOP').rejected.value, 200);
+});

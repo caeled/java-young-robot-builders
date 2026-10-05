@@ -59,12 +59,14 @@
             lines = result.trace.map(row => `${row.command}: (${f(row.x)}, ${f(row.y)}) cm, heading ${f(row.heading)}°`);
             lines.push(`Travel length: ${f(result.pathLength)} cm`);
             message = result.error || (result.reached ? `Delivered and stopped! Target error ${f(result.distance)} cm.` : `Stopped ${f(result.distance)} cm from the target. Use the trace to choose one correction.`);
+            lab.dispatchEvent(new CustomEvent('mission-result', { detail: result }));
             break;
           }
         }
         status.textContent = message;
         trace.textContent = lines.join('\n');
       } catch (error) {
+        if (lab.dataset.lab === '9') lab.dispatchEvent(new Event('mission-clear'));
         status.textContent = `Plan not run: ${error.message}`;
         trace.textContent = 'Fix the plan and try again. No commands from this attempt were executed.';
       }
@@ -74,6 +76,7 @@
       status.textContent = 'Lab reset. Predict the result before running.';
       trace.textContent = 'Results will appear here.';
       lab.querySelector('.motion-plot')?.remove();
+      if (lab.dataset.lab === '9') lab.dispatchEvent(new Event('mission-clear'));
     });
   }
   function drawPath(lab, path) {

@@ -62,7 +62,7 @@ python tests/check-site.py
 python tests/check-java.py
 ```
 
-No packages are needed. The Java check requires a JDK on PATH or `--jdk-bin` pointing to its bin directory. It compiles with `--release 17`, runs all eight examples, and compares exact output with `tests/java-expected.json`. Thirteen JavaScript tests cover geometry, calibration, wheel motion, automation stopping, feedback convergence/failure, and mission validation. Static checks verify local links, assets, anchors, copy targets, and navigation across 15 pages.
+No packages are needed. The Java check requires a JDK on PATH or `--jdk-bin` pointing to its bin directory. It compiles with `--release 17`, runs all eight examples, and compares exact output with `tests/java-expected.json`. Fourteen JavaScript tests cover geometry, calibration, wheel motion, automation stopping, feedback convergence/failure, and mission validation. Static checks verify local links, assets, anchors, copy targets, and navigation across 15 pages.
 
 Browser checks should include search/topic combinations, no matches, clear filters, deep links, example copying/downloads, all lab normal/failure cases, reset, keyboard use, and mobile layouts. Lessons, reference, and examples remain readable with scripting disabled.
 
@@ -77,3 +77,7 @@ See [LICENSE](LICENSE), [LICENSE-CONTENT.md](LICENSE-CONTENT.md), and [THIRD-PAR
 Ask for a prediction and reason, run one experiment, compare the result, change one thing, then have the learner explain the evidence. Paper sketches and a builder’s notebook help. Introduce the reference as a lookup tool, not a memorization list.
 
 The site is plain HTML/CSS/JavaScript. Lesson files are `module-1.html` through `module-9.html`. Search content is static in `java-reference.html` and `examples.html`, enhanced by `assets/search.js`. Pure calculations live in `assets/geometry.js` and `assets/lab-models.js`; interactions are in `assets/bench.js`, `assets/sequence.js`, and `assets/labs.js`. Keep snippets and downloadable programs clearly distinguished, and rerun relevant checks when changing model behavior.
+
+### Visual mission replay
+
+Module 9 animates validated DRIVE, TURN, and STOP commands on a top-down field. Replay, step, rewind, and an enlarged dialog help learners inspect the route, heading, and stopping point. Rejected moves leave the robot at its last valid position. Reduced-motion preferences show the final pose without automatic animation; stepping remains available. Playback timing is illustrative, not a motor simulation.

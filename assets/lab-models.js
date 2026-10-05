@@ -59,15 +59,24 @@
     const trace = [{ command: 'START', ...pose }];
     for (const { kind, value } of plan) {
       const next = kind === 'stop' ? pose : geometry[kind](pose, value);
-      if (!geometry.inField(next)) return { trace, pose, pathLength, reached: false, stopped: false, error: `${kind.toUpperCase()} ${value} would leave the field. Rejected at (${next.x.toFixed(1)}, ${next.y.toFixed(1)}); prior commands remain in the trace.` };
+      if (!geometry.inField(next)) return { trace, pose, pathLength, reached: false, stopped: false, rejected: { kind, value }, error: `${kind.toUpperCase()} ${value} would leave the field. Rejected at (${next.x.toFixed(1)}, ${next.y.toFixed(1)}); prior commands remain in the trace.` };
       pose = next;
       if (kind === 'drive') pathLength += Math.abs(value);
-      trace.push({ command: kind.toUpperCase() + (kind === 'stop' ? '' : ` ${value}`), ...pose });
+      trace.push({ command: kind.toUpperCase() + (kind === 'stop' ? '' : ` ${value}`), kind, value, ...pose });
     }
     const distance = geometry.guidance(pose, { x: 140, y: 120 }).distance;
     return { trace, pose, pathLength, distance, reached: distance <= 5, stopped: true };
   }
-  const api = { clamp, sensor, motor, stateStep, correction, parsePlan, runPlan };
+  // Keep the requested signed turn so +360 and -270 are animated faithfully.
+  function playbackPose(from, to, progress) {
+    const t = clamp(progress, 0, 1);
+    return {
+      x: from.x + (to.x - from.x) * t,
+      y: from.y + (to.y - from.y) * t,
+      heading: to.kind === 'turn' ? geometry.normalize(from.heading + to.value * t) : from.heading
+    };
+  }
+  const api = { clamp, sensor, motor, stateStep, correction, parsePlan, runPlan, playbackPose };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.RobotLabs = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
