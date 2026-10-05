@@ -66,7 +66,13 @@ No packages are needed. The Java check requires a JDK on PATH or `--jdk-bin` poi
 
 Browser checks should include search/topic combinations, no matches, clear filters, deep links, example copying/downloads, all lab normal/failure cases, reset, keyboard use, and mobile layouts. Lessons, reference, and examples remain readable with scripting disabled.
 
-## Mentors and contributors
+## Free reuse
+
+This project uses the same license setup as Nerd Heaven: **MIT** for original code, Java examples, CSS, and SVG artwork; **CC BY 4.0** for original lessons and educational content. Reuse and modification, including commercial use, are permitted under those licenses. Keep the required notices and credit, and indicate changes to educational material.
+
+See [LICENSE](LICENSE), [LICENSE-CONTENT.md](LICENSE-CONTENT.md), and [THIRD-PARTY.md](THIRD-PARTY.md). External videos, manufacturing photos, and linked documentation keep their own terms.
+
+## Mentor rhythm and contributions
 
 Ask for a prediction and reason, run one experiment, compare the result, change one thing, then have the learner explain the evidence. Paper sketches and a builder’s notebook help. Introduce the reference as a lookup tool, not a memorization list.
 
