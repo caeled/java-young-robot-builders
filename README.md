@@ -78,6 +78,10 @@ Ask for a prediction and reason, run one experiment, compare the result, change 
 
 The site is plain HTML/CSS/JavaScript. Lesson files are `module-1.html` through `module-9.html`. Search content is static in `java-reference.html` and `examples.html`, enhanced by `assets/search.js`. Pure calculations live in `assets/geometry.js` and `assets/lab-models.js`; interactions are in `assets/bench.js`, `assets/sequence.js`, and `assets/labs.js`. Keep snippets and downloadable programs clearly distinguished, and rerun relevant checks when changing model behavior.
 
+### More to discover
+
+Discover includes Google DeepMind’s RoboCat and reusable movement research demonstrations with plain-language ideas and bench activities, a real robot soccer research extension, and browser-playable Greenfoot Java projects (Ants and microkong). External project licenses remain with their creators.
+
 ### Visual mission replay
 
 Module 9 animates validated DRIVE, TURN, and STOP commands on a top-down field. Replay, step, rewind, and an enlarged dialog help learners inspect the route, heading, and stopping point. Rejected moves leave the robot at its last valid position. Reduced-motion preferences show the final pose without automatic animation; stepping remains available. Playback timing is illustrative, not a motor simulation.
